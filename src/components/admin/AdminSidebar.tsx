@@ -42,10 +42,10 @@ export default function AdminSidebar() {
           open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
-        <div className="flex items-center justify-between px-4 py-4 border-b border-slate-700">
-          <Link href="/admin/dashboard" className="flex items-center gap-3" onClick={() => setOpen(false)}>
-            <img src="/img/Gensar Main Logo 2400x1800.jpg.jpeg" alt="Gensar" className="h-8 w-auto" />
-            <span className="text-lg font-bold tracking-tight">Admin</span>
+        <div className="flex items-center justify-between px-4 py-3 border-b border-slate-700">
+          <Link href="/admin/dashboard" className="flex items-center gap-2" onClick={() => setOpen(false)}>
+            <img src="/img/Gensar Main Logo 2400x1800.jpg.jpeg" alt="Gensar" className="h-10 w-auto" />
+            <span className="text-base font-bold tracking-tight">Admin</span>
           </Link>
           <button
             onClick={() => setOpen(false)}

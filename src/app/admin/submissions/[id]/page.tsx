@@ -32,16 +32,16 @@ export default async function SubmissionDetailPage({ params }: { params: Promise
   const excludeFields = ["agreeCheck", "contactAgreeCheck", "homeAgreeCheck", "careersAgreeCheck"];
 
   return (
-    <div className="p-8 max-w-3xl">
+    <div className="p-4 sm:p-8 max-w-3xl">
       <div className="mb-8">
         <Link href="/admin/submissions" className="text-sm text-blue-600 hover:text-blue-700 mb-2 inline-block">&larr; Back to Submissions</Link>
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900">{formTypeLabels[submission.formType] || submission.formType}</h1>
-            <p className="text-slate-500 mt-1">Submitted on {new Date(submission.createdAt).toLocaleString()}{submission.read ? " · Read" : " · Unread"}</p>
+            <h1 className="text-xl sm:text-2xl font-bold text-slate-900">{formTypeLabels[submission.formType] || submission.formType}</h1>
+            <p className="text-slate-500 mt-1 text-sm">Submitted on {new Date(submission.createdAt).toLocaleString()}{submission.read ? " · Read" : " · Unread"}</p>
           </div>
           {submission.resumeUrl && (
-            <a href={submission.resumeUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-medium text-sm">
+            <a href={submission.resumeUrl} target="_blank" rel="noopener noreferrer" className="self-start sm:self-auto inline-flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg transition font-medium text-sm">
               Download Resume
             </a>
           )}

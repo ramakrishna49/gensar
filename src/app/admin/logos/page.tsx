@@ -14,13 +14,13 @@ export default async function LogosPage() {
   const allLogos = await db.select().from(clientLogos).orderBy(desc(clientLogos.displayOrder), desc(clientLogos.createdAt));
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-4 sm:p-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Client Logos</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Client Logos</h1>
           <p className="text-slate-500 mt-1">{allLogos.length} logo{allLogos.length !== 1 ? "s" : ""}</p>
         </div>
-        <Link href="/admin/logos/new" className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition text-sm">+ Add Logo</Link>
+        <Link href="/admin/logos/new" className="self-start sm:self-auto px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition text-sm text-center">+ Add Logo</Link>
       </div>
 
       {allLogos.length === 0 ? (

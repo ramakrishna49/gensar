@@ -13,13 +13,13 @@ export default async function TestimonialsPage() {
   const all = await db.select().from(testimonials).orderBy(desc(testimonials.sortOrder), desc(testimonials.createdAt));
 
   return (
-    <div className="p-8">
-      <div className="flex items-center justify-between mb-8">
+    <div className="p-4 sm:p-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Testimonials</h1>
+          <h1 className="text-xl sm:text-2xl font-bold text-slate-900">Testimonials</h1>
           <p className="text-slate-500 mt-1">{all.length} testimonial{all.length !== 1 ? "s" : ""}</p>
         </div>
-        <Link href="/admin/testimonials/new" className="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition text-sm">+ New Testimonial</Link>
+        <Link href="/admin/testimonials/new" className="self-start sm:self-auto px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition text-sm text-center">+ New Testimonial</Link>
       </div>
 
       {all.length === 0 ? (

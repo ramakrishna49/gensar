@@ -37,56 +37,81 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100">
-      <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 px-4">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 sm:p-10">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-slate-900">Gensar Admin</h1>
-          <p className="text-slate-500 mt-1">Sign in to manage your website</p>
+          <img
+            src="/img/Gensar Main Logo 2400x1800.jpg.jpeg"
+            alt="Gensar"
+            className="h-14 sm:h-16 w-auto mx-auto mb-4"
+          />
+          <h1 className="text-2xl font-bold text-slate-900 flex items-center justify-center gap-2">
+            <i className="fa-solid fa-shield-halved text-blue-600"></i>
+            Gensar Admin
+          </h1>
+          <p className="text-slate-500 mt-1 text-sm">Sign in to manage your website</p>
         </div>
 
         {error && (
-          <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm mb-6">
+          <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm mb-6 flex items-center gap-2">
+            <i className="fa-solid fa-circle-exclamation"></i>
             {error}
           </div>
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-slate-700 mb-1 flex items-center gap-1.5">
+              <i className="fa-solid fa-envelope text-slate-400"></i>
               Email
             </label>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              placeholder="admin@example.com"
-              required
-            />
+            <div className="relative">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full px-4 py-2.5 pl-10 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                placeholder="admin@example.com"
+                required
+              />
+              <i className="fa-solid fa-user text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 text-sm"></i>
+            </div>
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">
+            <label className="block text-sm font-medium text-slate-700 mb-1 flex items-center gap-1.5">
+              <i className="fa-solid fa-lock text-slate-400"></i>
               Password
             </label>
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-              placeholder="••••••••"
-              required
-            />
+            <div className="relative">
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full px-4 py-2.5 pl-10 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition"
+                placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
+                required
+              />
+              <i className="fa-solid fa-key text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 text-sm"></i>
+            </div>
           </div>
 
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-50"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-50 flex items-center justify-center gap-2"
           >
-            {loading ? "Signing in..." : "Sign In"}
+            {loading ? (
+              <><i className="fa-solid fa-spinner fa-spin"></i> Signing in...</>
+            ) : (
+              <><i className="fa-solid fa-right-to-bracket"></i> Sign In</>
+            )}
           </button>
         </form>
+
+        <p className="text-center text-xs text-slate-400 mt-6">
+          &copy; {new Date().getFullYear()} Gensar Consulting. All rights reserved.
+        </p>
       </div>
     </div>
   );
