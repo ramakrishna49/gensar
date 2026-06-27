@@ -268,7 +268,7 @@
             </div>
 
             <!-- Job Listings Cards -->
-            <div class="row gy-4" id="jobListingsContainer"></div>
+            <div class="row gy-4" id="jobListingsContainer"><div class="col-12 text-center py-5"><p class="text-secondary"><span class="spinner-border spinner-border-sm me-2" role="status"></span>Loading open positions...</p></div></div>
         </div>
     </section>
 
@@ -802,22 +802,23 @@
 
     <!-- Custom Script -->
     <script src="script.js"></script>
+    <noscript><div class="container text-center py-5"><p class="text-secondary">Enable JavaScript to view live job openings.</p></div></noscript>
     <script>
         // Job Search + Fetch from API
-        var API_BASE_CAREERS = (window.location.origin.includes('gensar') ? 'https://gensar-admin.vercel.app' : window.location.origin) + '/api/public';
-
         document.addEventListener("DOMContentLoaded", async function () {
             var container = document.getElementById("jobListingsContainer");
             var searchInput = document.getElementById("jobSearchInput");
             if (!container) return;
 
             try {
-                var res = await fetch(API_BASE_CAREERS + '/jobs');
-                var jobs = res.ok ? await res.json() : [];
+                var API_BASE = (window.location.origin.includes('gensar') ? 'https://gensar-admin.vercel.app' : window.location.origin) + '/api/public';
+                var res = await fetch(API_BASE + '/jobs', { cache: 'no-cache' });
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                var jobs = await res.json();
                 renderJobs(jobs);
             } catch (e) {
                 console.log('Jobs fetch failed:', e);
-                container.innerHTML = '<div class="col-12 text-center py-5"><p class="text-secondary">Unable to load jobs at this time. Please check back later.</p></div>';
+                container.innerHTML = '<div class="col-12 text-center py-5"><p class="text-secondary">Unable to load jobs at this time. Please check back later.</p><p class="text-muted small mt-2">If the problem persists, clear your cache or contact support.</p></div>';
             }
 
             function renderJobs(jobs) {
