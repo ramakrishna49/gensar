@@ -851,6 +851,12 @@
                         '</div>';
                 }).join('');
 
+                // Add animated class immediately since these cards are dynamically
+                // inserted (the IntersectionObserver already ran at DOMContentLoaded)
+                container.querySelectorAll('.job-item-card').forEach(function(c) {
+                    c.classList.add('animated');
+                });
+
                 populatePositionSelect(jobs);
                 reattachSearch();
                 reattachApplyButtons();
