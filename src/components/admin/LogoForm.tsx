@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import ImageUpload from "./ImageUpload";
 
 interface LogoFormData {
   imageUrl: string;
@@ -72,18 +73,10 @@ export default function LogoForm({ initialData, logoId }: Props) {
         <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm">{error}</div>
       )}
 
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-1">Image URL *</label>
-        <input
-          type="url"
-          name="imageUrl"
-          value={form.imageUrl}
-          onChange={handleChange}
-          className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-          placeholder="https://example.com/logo.png"
-          required
-        />
-      </div>
+      <ImageUpload
+        currentUrl={form.imageUrl}
+        onUploaded={(url) => setForm((prev) => ({ ...prev, imageUrl: url }))}
+      />
 
       <div>
         <label className="block text-sm font-medium text-slate-700 mb-1">Alt Text</label>

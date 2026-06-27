@@ -6,12 +6,12 @@ import { signOut } from "next-auth/react";
 import { useState } from "react";
 
 const navItems = [
-  { label: "Dashboard", href: "/admin/dashboard", icon: "📊" },
-  { label: "Job Openings", href: "/admin/jobs", icon: "💼" },
-  { label: "Submissions", href: "/admin/submissions", icon: "📋" },
-  { label: "Client Logos", href: "/admin/logos", icon: "🏢" },
-  { label: "Testimonials", href: "/admin/testimonials", icon: "⭐" },
-  { label: "Settings", href: "/admin/settings", icon: "⚙️" },
+  { label: "Dashboard", href: "/admin/dashboard", icon: "fa-solid fa-chart-pie" },
+  { label: "Job Openings", href: "/admin/jobs", icon: "fa-solid fa-briefcase" },
+  { label: "Submissions", href: "/admin/submissions", icon: "fa-solid fa-file-lines" },
+  { label: "Client Logos", href: "/admin/logos", icon: "fa-solid fa-building" },
+  { label: "Testimonials", href: "/admin/testimonials", icon: "fa-solid fa-star" },
+  { label: "Settings", href: "/admin/settings", icon: "fa-solid fa-gear" },
 ];
 
 export default function AdminSidebar() {
@@ -42,9 +42,10 @@ export default function AdminSidebar() {
           open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         }`}
       >
-        <div className="flex items-center justify-between px-6 py-5 border-b border-slate-700">
-          <Link href="/admin/dashboard" className="text-xl font-bold tracking-tight" onClick={() => setOpen(false)}>
-            Gensar Admin
+        <div className="flex items-center justify-between px-4 py-4 border-b border-slate-700">
+          <Link href="/admin/dashboard" className="flex items-center gap-3" onClick={() => setOpen(false)}>
+            <img src="/img/Gensar Main Logo 2400x1800.jpg.jpeg" alt="Gensar" className="h-8 w-auto" />
+            <span className="text-lg font-bold tracking-tight">Admin</span>
           </Link>
           <button
             onClick={() => setOpen(false)}
@@ -71,7 +72,7 @@ export default function AdminSidebar() {
                     : "text-slate-300 hover:bg-slate-700/50 hover:text-white"
                 }`}
               >
-                <span className="text-lg">{item.icon}</span>
+                <i className={`${item.icon} w-5 text-center text-base`}></i>
                 {item.label}
               </Link>
             );
@@ -83,7 +84,7 @@ export default function AdminSidebar() {
             onClick={() => signOut({ callbackUrl: "/admin/login" })}
             className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-700/50 hover:text-white w-full transition"
           >
-            <span className="text-lg">🚪</span>
+            <i className="fa-solid fa-right-from-bracket w-5 text-center"></i>
             Sign Out
           </button>
         </div>

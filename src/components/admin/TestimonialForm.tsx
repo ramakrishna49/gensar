@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import ImageUpload from "./ImageUpload";
 
 interface TestimonialFormData {
   name: string;
@@ -85,6 +86,11 @@ export default function TestimonialForm({ initialData, testimonialId }: Props) {
         <div className="bg-red-50 text-red-600 px-4 py-3 rounded-lg text-sm">{error}</div>
       )}
 
+      <ImageUpload
+        currentUrl={form.avatarUrl}
+        onUploaded={(url) => setForm((prev) => ({ ...prev, avatarUrl: url }))}
+      />
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-sm font-medium text-slate-700 mb-1">Name *</label>
@@ -133,18 +139,6 @@ export default function TestimonialForm({ initialData, testimonialId }: Props) {
             onChange={handleChange}
             className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
             placeholder="Company name"
-          />
-        </div>
-
-        <div>
-          <label className="block text-sm font-medium text-slate-700 mb-1">Avatar URL</label>
-          <input
-            type="url"
-            name="avatarUrl"
-            value={form.avatarUrl}
-            onChange={handleChange}
-            className="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
-            placeholder="https://example.com/avatar.jpg"
           />
         </div>
 

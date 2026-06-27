@@ -23,6 +23,15 @@ const formTypeLabels: Record<string, string> = {
   newsletter: "Newsletter",
 };
 
+const formTypeIcons: Record<string, string> = {
+  contact: "fa-solid fa-envelope",
+  careers: "fa-solid fa-briefcase",
+  consultation: "fa-solid fa-graduation-cap",
+  requirement: "fa-solid fa-handshake",
+  home_consultation: "fa-solid fa-headset",
+  newsletter: "fa-solid fa-newspaper",
+};
+
 export default function SubmissionsPage() {
   const router = useRouter();
   const { confirm, toast } = useToast();
@@ -169,7 +178,8 @@ export default function SubmissionsPage() {
                     className={`hover:bg-slate-50 transition ${!s.read ? "bg-blue-50/50" : ""}`}
                   >
                     <td className="px-6 py-4">
-                      <span className="inline-flex px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700">
+                      <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700">
+                        <i className={formTypeIcons[s.formType] || "fa-solid fa-file"}></i>
                         {formTypeLabels[s.formType] || s.formType}
                       </span>
                     </td>
