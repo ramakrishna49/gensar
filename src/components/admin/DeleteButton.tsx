@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useToast } from "./Toast";
 
 export default function DeleteButton({
   endpoint,
@@ -13,25 +14,28 @@ export default function DeleteButton({
   redirectOnDelete?: string;
 }) {
   const router = useRouter();
+  const { confirm, toast } = useToast();
   const [loading, setLoading] = useState(false);
 
   async function handleDelete() {
-    if (!confirm(`Delete "${label}"? This cannot be undone.`)) return;
+    const ok = await confirm(`Delete "${label}"? This cannot be undone.`);
+    if (!ok) return;
     setLoading(true);
 
     try {
       const res = await fetch(endpoint, { method: "DELETE" });
       if (!res.ok) {
         const data = await res.json();
-        alert(data.error || "Failed to delete");
+        toast(data.error || "Failed to delete", "error");
         return;
       }
+      toast("Deleted successfully", "success");
       if (redirectOnDelete) {
         router.push(redirectOnDelete);
       }
       router.refresh();
     } catch {
-      alert("Failed to delete");
+      toast("Failed to delete", "error");
     } finally {
       setLoading(false);
     }

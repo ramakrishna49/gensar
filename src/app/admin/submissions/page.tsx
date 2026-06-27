@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/components/admin/Toast";
 
 interface Submission {
   id: number;
@@ -24,6 +25,7 @@ const formTypeLabels: Record<string, string> = {
 
 export default function SubmissionsPage() {
   const router = useRouter();
+  const { confirm, toast } = useToast();
   const [submissions, setSubmissions] = useState<Submission[]>([]);
   const [loading, setLoading] = useState(true);
   const [togglingId, setTogglingId] = useState<number | null>(null);
@@ -58,6 +60,7 @@ export default function SubmissionsPage() {
     try {
       const res = await fetch(`/api/admin/submissions/${id}`, { method: "PUT" });
       if (!res.ok) throw new Error("Failed to toggle read status");
+      toast("Read status updated", "success");
       fetchSubmissions();
     } catch (err) {
       setActionError(err instanceof Error ? err.message : "Something went wrong");
@@ -67,12 +70,14 @@ export default function SubmissionsPage() {
   }
 
   async function deleteSubmission(id: number, name: string) {
-    if (!confirm(`Delete submission #${id} from "${name}"?`)) return;
+    const ok = await confirm(`Delete submission #${id} from "${name}"?`);
+    if (!ok) return;
     setDeletingId(id);
     setActionError("");
     try {
       const res = await fetch(`/api/admin/submissions/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error("Failed to delete submission");
+      toast("Submission deleted", "success");
       fetchSubmissions();
     } catch (err) {
       setActionError(err instanceof Error ? err.message : "Something went wrong");

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useToast } from "./Toast";
 
 export default function DeleteJobButton({
   jobId,
@@ -11,26 +12,25 @@ export default function DeleteJobButton({
   title: string;
 }) {
   const router = useRouter();
+  const { confirm, toast } = useToast();
   const [loading, setLoading] = useState(false);
 
   async function handleDelete() {
-    if (!confirm(`Delete "${title}"? This cannot be undone.`)) return;
+    const ok = await confirm(`Delete "${title}"? This cannot be undone.`);
+    if (!ok) return;
 
     setLoading(true);
     try {
-      const res = await fetch(`/api/admin/jobs/${jobId}`, {
-        method: "DELETE",
-      });
-
+      const res = await fetch(`/api/admin/jobs/${jobId}`, { method: "DELETE" });
       if (!res.ok) {
         const data = await res.json();
-        alert(data.error || "Failed to delete");
+        toast(data.error || "Failed to delete", "error");
         return;
       }
-
+      toast("Job deleted successfully", "success");
       router.refresh();
     } catch {
-      alert("Failed to delete job");
+      toast("Failed to delete job", "error");
     } finally {
       setLoading(false);
     }
