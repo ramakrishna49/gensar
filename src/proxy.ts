@@ -11,12 +11,14 @@ export default auth((req) => {
   if (isOnAdmin && !isLoggedIn && !isOnLogin) {
     const loginUrl = nextUrl.clone();
     loginUrl.pathname = "/admin/login";
+    loginUrl.host = req.headers.get("host") || loginUrl.host;
     return NextResponse.redirect(loginUrl);
   }
 
   if (isLoggedIn && isOnLogin) {
     const dashUrl = nextUrl.clone();
     dashUrl.pathname = "/admin/dashboard";
+    dashUrl.host = req.headers.get("host") || dashUrl.host;
     return NextResponse.redirect(dashUrl);
   }
 
