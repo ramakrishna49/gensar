@@ -822,32 +822,10 @@
 
             <!-- The Track Outer Viewport Mask -->
             <div class="infinite-marquee-track">
-
-                <!-- Flex Wrapper containing both sets -->
-                <div class="marquee-slide-stream">
-
-                    <!-- Set 1: Original Items -->
-                    <div class="marquee-group">
-                        <div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div>
-                        <div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div>
-                        <div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div>
-                        <div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div>
-                        <div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div>
-                        <div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div>
-                    </div>
-
-                    <!-- Set 2: Exact Twin Duplicate (Crucial for endless illusion) -->
-                    <div class="marquee-group" aria-hidden="true">
-                        <div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div>
-                        <div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div>
-                        <div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div>
-                        <div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div>
-                        <div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div>
-                        <div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div>
-                    </div>
-
+                <div class="marquee-slide-stream" id="aboutLogosContainer">
+                    <div class="marquee-group"><div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div></div>
+                    <div class="marquee-group" aria-hidden="true"><div class="marquee-logo-item"><img src="img/gensar_logo.png" alt="Partner"></div></div>
                 </div>
-
             </div>
 
         </div>
@@ -996,6 +974,22 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
+    <script>
+        var A_API = (window.location.origin.includes('gensar') ? 'https://gensar-admin.vercel.app' : window.location.origin) + '/api/public';
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                var r = await fetch(A_API + '/logos');
+                if (r.ok) {
+                    var logos = await r.json();
+                    var c = document.getElementById('aboutLogosContainer');
+                    if (c && logos.length) {
+                        var items = logos.map(function (l) { return '<div class="marquee-logo-item"><img src="' + l.imageUrl + '" alt="' + (l.altText || 'Partner') + '"></div>'; }).join('');
+                        c.innerHTML = '<div class="marquee-group">' + items + '</div><div class="marquee-group" aria-hidden="true">' + items + '</div>';
+                    }
+                }
+            } catch (e) { console.log(e); }
+        });
+    </script>
 
     <div class="scroll-progress" id="scrollProgress">
         <svg viewBox="0 0 40 40">

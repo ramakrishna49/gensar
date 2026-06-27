@@ -593,28 +593,8 @@
             </div>
 
             <div class="logo-marquee">
-                <div class="logo-track">
-
-                    <!-- Set 1 -->
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-                    <img src="img/gensar_logo.png" alt="Client Logo">
-
-
-
-
-                </div>
+                <div class="logo-track" id="clientLogosTrack"></div>
+            </div>
             </div>
 
         </div>
@@ -711,57 +691,7 @@
                 </p>
             </div>
 
-            <div class="row gy-4 anim-fade from-left">
-                <!-- Testimonial 1 -->
-                <div class="col-lg-6">
-                    <div class="testimonial-card">
-                        <i class="bi bi-quote quote-icon"></i>
-                        <div class="testimonial-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                        <p class="testimonial-comment">
-                            "Gensar transformed our engineering setup. Their take-home sandbox VMs helped us validate
-                            cloud compliance pipelines before deployment. Excellent uptime audits."
-                        </p>
-                        <div class="testimonial-user">
-                            <div class="testimonial-avatar">RM</div>
-                            <div>
-                                <h5 class="testimonial-name">Rajesh Mehta</h5>
-                                <span class="testimonial-meta">VP Engineering, FinTech Solutions</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Testimonial 2 -->
-                <div class="col-lg-6 delay-100">
-                    <div class="testimonial-card">
-                        <i class="bi bi-quote quote-icon"></i>
-                        <div class="testimonial-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                        <p class="testimonial-comment">
-                            "The document accessibility conversion pipeline Gensar constructed was flawless. Over 100k
-                            files converted with complete Section 508 compliance. Timely execution."
-                        </p>
-                        <div class="testimonial-user">
-                            <div class="testimonial-avatar">SC</div>
-                            <div>
-                                <h5 class="testimonial-name">Sarah Connor</h5>
-                                <span class="testimonial-meta">Operations Lead, Global Legal Services</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="row gy-4 anim-fade from-left" id="testimonialsContainer"></div>
         </div>
     </section>
 
@@ -1881,6 +1811,41 @@
             }
         }
     </script>
+
+    <script>
+        var API = (window.location.origin.includes('gensar') ? 'https://gensar-admin.vercel.app' : window.location.origin) + '/api/public';
+
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                var logosRes = await fetch(API + '/logos');
+                if (logosRes.ok) {
+                    var logos = await logosRes.json();
+                    var track = document.getElementById('clientLogosTrack');
+                    if (track && logos.length) {
+                        track.innerHTML = logos.map(function (l) { return '<img src="' + l.imageUrl + '" alt="' + (l.altText || 'Client Logo') + '">'; }).join('') + logos.map(function (l) { return '<img src="' + l.imageUrl + '" alt="' + (l.altText || 'Client Logo') + '">'; }).join('');
+                    }
+                }
+            } catch (e) { console.log('Logos fetch failed:', e); }
+
+            try {
+                var tRes = await fetch(API + '/testimonials?section=home');
+                if (tRes.ok) {
+                    var testimonials = await tRes.json();
+                    var container = document.getElementById('testimonialsContainer');
+                    if (container && testimonials.length) {
+                        container.innerHTML = testimonials.map(function (t, i) {
+                            var initials = (t.name || '?').split(' ').map(function (s) { return s[0]; }).join('').toUpperCase().slice(0, 2);
+                            var stars = '';
+                            for (var s = 0; s < (t.rating || 5); s++) stars += '<i class="bi bi-star-fill"></i>';
+                            var delay = i % 2 === 1 ? ' delay-100' : '';
+                            return '<div class="col-lg-6' + delay + '"><div class="testimonial-card"><i class="bi bi-quote quote-icon"></i><div class="testimonial-rating">' + stars + '</div><p class="testimonial-comment">"' + (t.content || '') + '"</p><div class="testimonial-user"><div class="testimonial-avatar">' + initials + '</div><div><h5 class="testimonial-name">' + (t.name || '') + '</h5><span class="testimonial-meta">' + (t.role ? t.role + (t.company ? ', ' + t.company : '') : t.company || '') + '</span></div></div></div></div>';
+                        }).join('');
+                    }
+                }
+            } catch (e) { console.log('Testimonials fetch failed:', e); }
+        });
+    </script>
+
     <div class="scroll-progress" id="scrollProgress">
         <svg viewBox="0 0 40 40">
             <circle class="progress-bg" cx="20" cy="20" r="17" />

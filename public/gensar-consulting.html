@@ -517,82 +517,7 @@
                 </p>
             </div>
 
-            <div class="row gy-4 justify-content-center mt-2">
-                <div class="col-lg-4 col-md-6 anim-fade from-left">
-                    <div class="testimonial-card">
-                        <span class="quote-icon"><i class="bi bi-quote"></i></span>
-                        <div class="testimonial-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                        <p class="testimonial-comment">
-                            "The AI/ML program was transformative. I transitioned from general data analyst to deep
-                            learning engineer in under 6 months. The capstone project was specifically praised in my
-                            interview panels."
-                        </p>
-                        <div class="testimonial-user">
-                            <div class="testimonial-avatar">SP</div>
-                            <div>
-                                <h5 class="testimonial-name">Siddharth Patel</h5>
-                                <span class="testimonial-meta">Deep Learning Lead, InnovateAI</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 anim-fade from-left delay-100">
-                    <div class="testimonial-card">
-                        <span class="quote-icon"><i class="bi bi-quote"></i></span>
-                        <div class="testimonial-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                        <p class="testimonial-comment">
-                            "The cybersecurity curriculum was hyper-relevant. We weren't just reading books; we were
-                            actively hacking and hardening sandboxes. I cleared my OSCP and landing an audit role
-                            immediately."
-                        </p>
-                        <div class="testimonial-user">
-                            <div class="testimonial-avatar">AR</div>
-                            <div>
-                                <h5 class="testimonial-name">Ananya Rao</h5>
-                                <span class="testimonial-meta">Penetration Tester, Securitas Corp</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 anim-fade from-left delay-200">
-                    <div class="testimonial-card">
-                        <span class="quote-icon"><i class="bi bi-quote"></i></span>
-                        <div class="testimonial-rating">
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                            <i class="bi bi-star-fill"></i>
-                        </div>
-                        <p class="testimonial-comment">
-                            "Building responsive React applications connected to secure microservices in their Full
-                            Stack track gave me real codebase experience. I felt completely prepared on day one of my
-                            senior dev role."
-                        </p>
-                        <div class="testimonial-user">
-                            <div class="testimonial-avatar">MK</div>
-                            <div>
-                                <h5 class="testimonial-name">Marcus K.</h5>
-                                <span class="testimonial-meta">Sr. Full Stack Dev, CloudScale</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div class="row gy-4 justify-content-center mt-2" id="consultingTestimonialsContainer"></div>
         </div>
     </section>
 
@@ -1888,6 +1813,26 @@
         /* ==========================================================================
            8. Duplicate form handler removed (merged into initConsultationForm)
            ========================================================================== */
+    </script>
+    <script>
+        var GC_API = (window.location.origin.includes('gensar') ? 'https://gensar-admin.vercel.app' : window.location.origin) + '/api/public';
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                var r = await fetch(GC_API + '/testimonials?section=consulting');
+                if (r.ok) {
+                    var testimonials = await r.json();
+                    var c = document.getElementById('consultingTestimonialsContainer');
+                    if (c && testimonials.length) {
+                        c.innerHTML = testimonials.map(function (t, i) {
+                            var initials = (t.name || '?').split(' ').map(function (s) { return s[0]; }).join('').toUpperCase().slice(0, 2);
+                            var stars = ''; for (var s = 0; s < (t.rating || 5); s++) stars += '<i class="bi bi-star-fill"></i>';
+                            var delay = i === 1 ? ' delay-100' : i === 2 ? ' delay-200' : '';
+                            return '<div class="col-lg-4 col-md-6 anim-fade from-left' + delay + '"><div class="testimonial-card"><span class="quote-icon"><i class="bi bi-quote"></i></span><div class="testimonial-rating">' + stars + '</div><p class="testimonial-comment">"' + (t.content || '') + '"</p><div class="testimonial-user"><div class="testimonial-avatar">' + initials + '</div><div><h5 class="testimonial-name">' + (t.name || '') + '</h5><span class="testimonial-meta">' + (t.role ? t.role + (t.company ? ', ' + t.company : '') : t.company || '') + '</span></div></div></div></div>';
+                        }).join('');
+                    }
+                }
+            } catch (e) { console.log(e); }
+        });
     </script>
     <div class="scroll-progress" id="scrollProgress">
         <svg viewBox="0 0 40 40">

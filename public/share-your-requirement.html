@@ -700,25 +700,7 @@
             <!-- Logos -->
 
             <div class="clients-marquee">
-
-                <div class="clients-track">
-
-                    <img src="img/gensar_logo.png" alt="">
-                    <img src="img/gensar_logo.png" alt="">
-                    <img src="img/client3.png" alt="">
-                    <img src="img/client4.png" alt="">
-                    <img src="img/client5.png" alt="">
-                    <img src="img/client6.png" alt="">
-
-                    <img src="img/gensar_logo.png" alt="">
-                    <img src="img/gensar_logo.png" alt="">
-                    <img src="img/gensar_logo.png" alt="">
-                    <img src="img/gensar_logo.png" alt="">
-                    <img src="img/gensar_logo.png" alt="">
-
-
-                </div>
-
+                <div class="clients-track" id="shareLogosTrack"></div>
             </div>
 
             <div class="testimonial-heading anim-fade from-right">
@@ -740,101 +722,7 @@
 
             </div>
 
-            <div class="row g-4 anim-fade from-right">
-
-                <div class="col-lg-3 col-md-6 delay-100">
-
-                    <div class="testimonial-card">
-
-                        <img src="img/user1.jpg" alt="">
-
-                        <h4>Excellent Hiring Support</h4>
-
-                        <p>
-                            The recruitment process was smooth and we hired
-                            qualified candidates faster than expected.
-                        </p>
-
-                        <div class="rating">
-                            ★★★★★
-                        </div>
-
-                        <span>Michael Brown</span>
-
-                    </div>
-
-                </div>
-
-                <div class="col-lg-3 col-md-6 delay-200">
-
-                    <div class="testimonial-card">
-
-                        <img src="img/user2.jpg" alt="">
-
-                        <h4>Highly Professional</h4>
-
-                        <p>
-                            Gensar helped us scale our engineering team with
-                            quality talent and excellent support.
-                        </p>
-
-                        <div class="rating">
-                            ★★★★★
-                        </div>
-
-                        <span>Jennifer Clark</span>
-
-                    </div>
-
-                </div>
-
-                <div class="col-lg-3 col-md-6 delay-300">
-
-                    <div class="testimonial-card">
-
-                        <img src="img/user3.jpg" alt="">
-
-                        <h4>Great Experience</h4>
-
-                        <p>
-                            Their consulting expertise improved our workflow
-                            and accelerated project delivery.
-                        </p>
-
-                        <div class="rating">
-                            ★★★★★
-                        </div>
-
-                        <span>David Wilson</span>
-
-                    </div>
-
-                </div>
-
-                <div class="col-lg-3 col-md-6 delay-300">
-
-                    <div class="testimonial-card">
-
-                        <img src="img/user4.jpg" alt="">
-
-                        <h4>Outstanding Results</h4>
-
-                        <p>
-                            We received top-quality candidates and excellent
-                            communication throughout the process.
-                        </p>
-
-                        <div class="rating">
-                            ★★★★★
-                        </div>
-
-                        <span>Sarah Taylor</span>
-
-                    </div>
-
-                </div>
-
-            </div>
+            <div class="row g-4 anim-fade from-right" id="shareTestimonialsContainer"></div>
 
         </div>
 
@@ -1079,6 +967,37 @@
             }
 
         });
+        });
+    </script>
+
+    <script>
+        var SYR_API = (window.location.origin.includes('gensar') ? 'https://gensar-admin.vercel.app' : window.location.origin) + '/api/public';
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                var r = await fetch(SYR_API + '/logos');
+                if (r.ok) {
+                    var logos = await r.json();
+                    var t = document.getElementById('shareLogosTrack');
+                    if (t && logos.length) {
+                        var imgs = logos.map(function (l) { return '<img src="' + l.imageUrl + '" alt="' + (l.altText || 'Client') + '">'; }).join('');
+                        t.innerHTML = imgs + imgs;
+                    }
+                }
+            } catch (e) { console.log(e); }
+            try {
+                var r = await fetch(SYR_API + '/testimonials?section=contact');
+                if (r.ok) {
+                    var testimonials = await r.json();
+                    var c = document.getElementById('shareTestimonialsContainer');
+                    if (c && testimonials.length) {
+                        var delays = ['delay-100', 'delay-200', 'delay-300', 'delay-300'];
+                        c.innerHTML = testimonials.map(function (t, i) {
+                            var d = delays[i % delays.length] || '';
+                            return '<div class="col-lg-3 col-md-6 ' + d + '"><div class="testimonial-card"><img src="' + (t.avatarUrl || 'img/user1.jpg') + '" alt=""><h4>' + (t.role || 'Client') + '</h4><p>"' + (t.content || '') + '"</p><div class="rating">' + '★'.repeat(t.rating || 5) + '</div><span>' + (t.name || '') + '</span></div></div>';
+                        }).join('');
+                    }
+                }
+            } catch (e) { console.log(e); }
         });
     </script>
 
