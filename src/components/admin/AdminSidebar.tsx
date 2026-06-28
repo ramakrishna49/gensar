@@ -81,7 +81,12 @@ export default function AdminSidebar() {
 
         <div className="px-3 py-4 border-t border-slate-700">
           <button
-            onClick={() => signOut({ callbackUrl: "/admin/login" })}
+            onClick={async () => {
+              try {
+                await signOut({ redirect: false });
+              } catch {}
+              window.location.href = "/admin/login";
+            }}
             className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-700/50 hover:text-white w-full transition"
           >
             <i className="fa-solid fa-right-from-bracket w-5 text-center"></i>
