@@ -22,7 +22,7 @@ export default function AdminSidebar() {
     <>
       <button
         onClick={() => setOpen(true)}
-        className="fixed top-4 left-4 z-50 lg:hidden bg-slate-800 text-white p-2.5 rounded-lg shadow-lg"
+        className="fixed top-4 right-4 z-50 lg:hidden bg-slate-800 text-white p-2.5 rounded-lg shadow-lg"
         aria-label="Open menu"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -38,8 +38,8 @@ export default function AdminSidebar() {
       )}
 
       <aside
-        className={`fixed lg:static inset-y-0 left-0 z-50 w-64 bg-slate-800 text-white flex flex-col shrink-0 transition-transform duration-200 ${
-          open ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        className={`fixed lg:static inset-y-0 right-0 z-50 w-64 bg-slate-800 text-white flex flex-col shrink-0 transition-transform duration-200 ${
+          open ? "translate-x-0" : "translate-x-full lg:translate-x-0"
         }`}
       >
         <div className="flex items-center justify-between px-4 py-3 border-b border-slate-700">
