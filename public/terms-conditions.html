@@ -1,102 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" href="img/fav-icon.png" type="image/x-icon">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/fav-icon.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/fav-icon-16.png">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Terms & Conditions - Gensar Consulting. Understand the terms governing the use of our website and services.">
-    <meta name="robots" content="index, follow">
-    <meta property="og:title" content="Terms & Conditions - Gensar | IT, Non-IT & Staffing Solutions">
-    <meta property="og:description" content="Terms & Conditions for Gensar Consulting. Understand your rights and obligations.">
-    <meta property="og:image" content="img/gensar_logo.png">
-    <meta property="og:type" content="website">
-    <title>Terms & Conditions - Gensar | IT, Non-IT & Staffing Solutions</title>
-
+    <title>Terms & Conditions - Gensar Consulting</title>
+    <link rel="shortcut icon" href="img/fav-icon.png" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .policy-header {
-            padding: 160px 0 80px 0;
-            background: linear-gradient(135deg, #f9f5ff, #edf4ff, #fff8f1);
-            position: relative;
-            overflow: hidden;
-        }
-        .policy-header h1 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: #111;
-        }
-        .policy-header p {
-            color: #666;
-            font-size: 1.1rem;
-            max-width: 600px;
-        }
-        .policy-section {
-            padding: 80px 0;
-            background: #fff;
-        }
-        .policy-section h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: #111;
-            margin-bottom: 20px;
-            margin-top: 40px;
-        }
-        .policy-section h2:first-child {
-            margin-top: 0;
-        }
-        .policy-section h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #222;
-            margin-top: 30px;
-            margin-bottom: 12px;
-        }
-        .policy-section p, .policy-section li {
-            color: #555;
-            font-size: 1rem;
-            line-height: 1.8;
-        }
-        .policy-section ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        .policy-section ul li {
-            padding-left: 24px;
-            position: relative;
-            margin-bottom: 8px;
-        }
-        .policy-section ul li::before {
-            content: "\f105";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
-            position: absolute;
-            left: 0;
-            color: #b58ae3;
-        }
-        .policy-section .last-updated {
-            color: #999;
-            font-size: 0.9rem;
-            margin-bottom: 30px;
-        }
-        @media (max-width: 991px) {
-            .policy-header { padding: 140px 0 60px 0; }
-            .policy-header h1 { font-size: 2.2rem; }
-            .policy-section { padding: 50px 0; }
-        }
-    </style>
 </head>
-
 <body>
-
-    <div class="cursor" id="cursor"></div>
-    <div class="cursor-ring" id="cursorRing"></div>
-
     <nav class="navbar navbar-expand-lg custom-navbar fixed-top">
         <div class="container">
             <a class="navbar-brand" href="index.html">
@@ -112,14 +25,13 @@
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="our-services.html">Services</a></li>
                     <li class="nav-item dropdown custom-dropdown">
-                        <a class="nav-link dropdown-toggle" href="gensar-consulting.html" id="navbarDropdown"
-                            role="button" data-bs-toggle="dropdown" aria-expanded="false">Internship</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="gensar-consulting.html?course=ai-ml">AI & ML</a></li>
-                            <li><a class="dropdown-item" href="gensar-consulting.html?course=data-science">Data Science</a></li>
-                            <li><a class="dropdown-item" href="gensar-consulting.html?course=data-analytics">Data Analytics</a></li>
-                            <li><a class="dropdown-item" href="gensar-consulting.html?course=cyber-security">Cyber Security</a></li>
-                            <li><a class="dropdown-item" href="gensar-consulting.html?course=full-stack">Full Stack Development</a></li>
+                        <a class="nav-link dropdown-toggle" href="gensar-consulting.html" role="button" data-bs-toggle="dropdown">Internship</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="gensar-consulting.html" data-course-select="ai-ml">AI & ML</a></li>
+                            <li><a class="dropdown-item" href="gensar-consulting.html" data-course-select="data-science">Data Science</a></li>
+                            <li><a class="dropdown-item" href="gensar-consulting.html" data-course-select="data-analytics">Data Analytics</a></li>
+                            <li><a class="dropdown-item" href="gensar-consulting.html" data-course-select="cyber-security">Cyber Security</a></li>
+                            <li><a class="dropdown-item" href="gensar-consulting.html" data-course-select="full-stack">Full Stack Development</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="careers.html">Careers</a></li>
@@ -130,119 +42,53 @@
         </div>
     </nav>
 
-    <section class="policy-header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <span class="hero-tag mb-3" style="color: #b58ae3; background: rgba(181,138,227,0.08); border-color: rgba(181,138,227,0.25);">Terms & Conditions</span>
-                    <h1>Terms & Conditions</h1>
-                    <p>Please read these terms carefully before using our website or engaging our services. By accessing our site, you agree to be bound by these terms.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="policy-section">
+    <section class="section-padding" style="padding-top: 150px;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-10">
-                    <p class="last-updated"><i class="bi bi-clock me-2"></i>Last Updated: June 15, 2026</p>
+                    <h1 class="mb-4 text-gradient-purple">Terms & Conditions</h1>
+                    <p class="text-muted mb-5">Last updated: June 2026</p>
 
-                    <h2>1. Acceptance of Terms</h2>
-                    <p>By accessing or using the Gensar Consulting website ("the Site") and its services, you agree to comply with and be bound by these Terms & Conditions ("Terms"). If you do not agree with any part of these Terms, you must not use the Site or our services. These Terms apply to all visitors, users, clients, applicants, and others who access or use our website.</p>
+                    <div class="mb-5">
+                        <h4 class="mb-3">1. Acceptance of Terms</h4>
+                        <p>By accessing and using the Gensar Consulting website, you agree to comply with and be bound by these Terms & Conditions. If you do not agree with any part of these terms, you should not use our website or services.</p>
+                    </div>
 
-                    <h2>2. Definitions</h2>
-                    <ul>
-                        <li><strong>"Company," "we," "us," "our"</strong> refers to Gensar IT Solutions Pvt Ltd, its subsidiaries, and affiliates.</li>
-                        <li><strong>"Services"</strong> includes IT solutions, non-IT business process services, staffing and recruitment solutions, corporate training programs, internship programs, and consulting services offered by Gensar.</li>
-                        <li><strong>"User," "you," "your"</strong> refers to the individual or entity accessing or using our website or services.</li>
-                        <li><strong>"Content"</strong> includes text, graphics, images, videos, logos, documents, and any other material available on the Site.</li>
-                    </ul>
+                    <div class="mb-5">
+                        <h4 class="mb-3">2. Services</h4>
+                        <p>Gensar Consulting provides IT services, non-IT services, staffing solutions, corporate training, and consulting services. The scope and terms of each engagement will be defined in separate service agreements.</p>
+                    </div>
 
-                    <h2>3. Use of the Website</h2>
-                    <h3>3.1 Eligibility</h3>
-                    <p>By using the Site, you represent that you are at least 16 years of age and have the legal capacity to enter into binding agreements. If you are using the Site on behalf of an organization, you represent that you have the authority to bind that organization to these Terms.</p>
+                    <div class="mb-5">
+                        <h4 class="mb-3">3. Use of Website</h4>
+                        <p>You agree to use our website only for lawful purposes. You must not:</p>
+                        <ul>
+                            <li>Submit false or misleading information</li>
+                            <li>Upload malicious content or viruses</li>
+                            <li>Attempt to gain unauthorized access to our systems</li>
+                            <li>Use our website in any way that may damage our reputation</li>
+                        </ul>
+                    </div>
 
-                    <h3>3.2 Permitted Use</h3>
-                    <p>You agree to use the Site only for lawful purposes and in accordance with these Terms. You shall not:</p>
-                    <ul>
-                        <li>Use the Site in any way that violates applicable laws or regulations.</li>
-                        <li>Impersonate any person or entity or misrepresent your affiliation with any person or entity.</li>
-                        <li>Engage in any conduct that could damage, disable, or impair the functionality of the Site.</li>
-                        <li>Attempt to gain unauthorized access to any part of the Site, servers, or systems.</li>
-                        <li>Upload or transmit viruses, malware, or any malicious code.</li>
-                        <li>Collect or harvest personal information of other users without their consent.</li>
-                    </ul>
+                    <div class="mb-5">
+                        <h4 class="mb-3">4. Intellectual Property</h4>
+                        <p>All content on this website, including text, graphics, logos, and images, is the property of Gensar Consulting and is protected by applicable intellectual property laws.</p>
+                    </div>
 
-                    <h3>3.3 Account Registration</h3>
-                    <p>Certain features of our website or services may require you to register and create an account. You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to notify us immediately of any unauthorized use of your account.</p>
+                    <div class="mb-5">
+                        <h4 class="mb-3">5. Limitation of Liability</h4>
+                        <p>Gensar Consulting shall not be liable for any indirect, incidental, or consequential damages arising from the use of our website or services.</p>
+                    </div>
 
-                    <h2>4. Intellectual Property Rights</h2>
-                    <h3>4.1 Our Content</h3>
-                    <p>All content, materials, trademarks, logos, and intellectual property displayed on the Site, including but not limited to text, graphics, software, images, videos, and design elements, are owned by or licensed to Gensar IT Solutions Pvt Ltd and are protected by applicable intellectual property laws. You may not reproduce, distribute, modify, create derivative works from, publicly display, or exploit any content without our prior written consent.</p>
+                    <div class="mb-5">
+                        <h4 class="mb-3">6. Changes to Terms</h4>
+                        <p>We reserve the right to update these terms at any time. Continued use of our website after changes constitutes acceptance of the new terms.</p>
+                    </div>
 
-                    <h3>4.2 User Submissions</h3>
-                    <p>By submitting information, documents, or content to us through forms, applications, or communications, you grant us a non-exclusive, royalty-free license to use, store, and process that information for the purpose of providing our services and as described in our Privacy Policy. You represent that your submissions do not infringe upon the rights of any third party.</p>
-
-                    <h2>5. Services and Engagements</h2>
-                    <h3>5.1 Service Descriptions</h3>
-                    <p>We strive to accurately describe our services on the website. However, service descriptions are for informational purposes and do not constitute a binding offer. Specific service terms, pricing, and scope will be defined in separate agreements or statements of work (SOW) executed between Gensar and the client.</p>
-
-                    <h3>5.2 Project Timelines</h3>
-                    <p>Project timelines provided on the website or during consultations are estimates based on typical scenarios. Actual delivery timelines may vary based on project complexity, scope changes, client responsiveness, and other factors beyond our control.</p>
-
-                    <h3>5.3 Third-Party Services</h3>
-                    <p>Our services may include or rely on third-party platforms, tools, or services. We do not guarantee the availability or performance of third-party services and are not liable for any issues arising from their use.</p>
-
-                    <h2>6. Career Applications and Internships</h2>
-                    <p>By submitting a job application, internship registration, or career inquiry through our website, you acknowledge and agree that:</p>
-                    <ul>
-                        <li>All information provided is true, accurate, and complete to the best of your knowledge.</li>
-                        <li>We may verify the information provided through background checks or reference verification, where permitted by law.</li>
-                        <li>Submission of an application does not guarantee employment, internship placement, or further consideration.</li>
-                        <li>We may retain your application information in our talent database for future opportunities unless you request its deletion.</li>
-                        <li>We reserve the right to reject applications that contain false or misleading information.</li>
-                    </ul>
-
-                    <h2>7. Privacy and Data Protection</h2>
-                    <p>Your use of the Site is also governed by our Privacy Policy and Cookie Policy, which are incorporated into these Terms by reference. Please review these policies to understand how we collect, use, and protect your personal information.</p>
-
-                    <h2>8. Limitation of Liability</h2>
-                    <p>To the maximum extent permitted by applicable law:</p>
-                    <ul>
-                        <li>Gensar IT Solutions Pvt Ltd, its officers, directors, employees, and agents shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising out of or related to your use of the Site or services.</li>
-                        <li>Our total liability for any claim arising from these Terms or your use of the Site shall not exceed the amount paid by you (if any) for accessing our services during the twelve months preceding the claim.</li>
-                        <li>We are not liable for any damages resulting from service interruptions, data loss, or unauthorized access to your information due to factors beyond our reasonable control.</li>
-                    </ul>
-
-                    <h2>9. Disclaimer of Warranties</h2>
-                    <p>The Site and all content, materials, and services are provided on an "as is" and "as available" basis without warranties of any kind, either express or implied. We do not warrant that the Site will be uninterrupted, error-free, secure, or free from viruses or other harmful components. We disclaim all warranties, including but not limited to warranties of merchantability, fitness for a particular purpose, and non-infringement.</p>
-
-                    <h2>10. Indemnification</h2>
-                    <p>You agree to indemnify, defend, and hold harmless Gensar IT Solutions Pvt Ltd, its affiliates, and their respective officers, directors, employees, and agents from and against any claims, liabilities, damages, losses, costs, and expenses (including reasonable legal fees) arising out of or related to your violation of these Terms, your use of the Site, or your infringement of any third-party rights.</p>
-
-                    <h2>11. Termination</h2>
-                    <p>We reserve the right to suspend or terminate your access to the Site or services at any time, without prior notice, for conduct that we believe violates these Terms or is harmful to other users, third parties, or our business interests. Upon termination, your right to use the Site will immediately cease, but other provisions of these Terms that by their nature should survive termination shall remain in effect.</p>
-
-                    <h2>12. Governing Law and Dispute Resolution</h2>
-                    <p>These Terms shall be governed by and construed in accordance with the laws of India. Any disputes arising from these Terms or your use of the Site shall be subject to the exclusive jurisdiction of the courts located in Hyderabad, Telangana, India. We encourage you to contact us first to resolve any concerns informally before pursuing formal legal action.</p>
-
-                    <h2>13. Changes to Terms</h2>
-                    <p>We reserve the right to modify or update these Terms at any time. Changes will be effective immediately upon posting on this page. We will indicate the "Last Updated" date at the top of this page. Your continued use of the Site after changes are posted constitutes your acceptance of the modified Terms. We encourage you to review these Terms periodically.</p>
-
-                    <h2>14. Severability</h2>
-                    <p>If any provision of these Terms is found to be unenforceable or invalid by a court of competent jurisdiction, that provision shall be limited or eliminated to the minimum extent necessary, and the remaining provisions shall remain in full force and effect.</p>
-
-                    <h2>15. Entire Agreement</h2>
-                    <p>These Terms, together with our Privacy Policy and Cookie Policy, constitute the entire agreement between you and Gensar regarding your use of the Site and supersede any prior agreements or understandings, whether written or oral.</p>
-
-                    <h2>16. Contact Information</h2>
-                    <p>If you have any questions or concerns about these Terms, please contact us:</p>
-                    <ul>
-                        <li><strong>Email:</strong> info@gensarit.com</li>
-                        <li><strong>Phone:</strong> +91 91219 12138</li>
-                        <li><strong>Address:</strong> Manjeera Trinity, 402, 4th floor, KPHB, Hyderabad – 500072, India</li>
-                    </ul>
+                    <div class="mb-5">
+                        <h4 class="mb-3">7. Contact</h4>
+                        <p>For questions about these terms, please contact us at <strong>contact@gensar.com</strong>.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -254,10 +100,10 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="footer-brand">
                         <img src="img/Gensar Main Logo 2400x1800.jpg.jpeg" alt="Gensar Consulting" class="footer-logo">
-                        <p class="footer-about">Gensar Consulting empowers businesses with innovative IT solutions, staffing services, corporate training, and digital transformation strategies that drive measurable growth and long-term success.</p>
+                        <p class="footer-about">Gensar Consulting empowers businesses with innovative IT solutions, staffing services, corporate training, and digital transformation strategies.</p>
                         <div class="footer-social">
-                            <a href="https://www.linkedin.com/company/gensar-group/posts/?feedView=all" target="_blank"><i class="bi bi-linkedin"></i></a>
-                            <a href="https://www.instagram.com/gensar_group/" target="_blank"><i class="bi bi-instagram"></i></a>
+                            <a href="https://linkedin.com/company/gensar" target="_blank"><i class="bi bi-linkedin"></i></a>
+                            <a href="https://instagram.com/gensar" target="_blank"><i class="bi bi-instagram"></i></a>
                         </div>
                     </div>
                 </div>
@@ -268,45 +114,11 @@
                         <li><a href="about.html">About</a></li>
                         <li><a href="our-services.html">Services</a></li>
                         <li><a href="gensar-consulting.html">Courses</a></li>
+                        <li><a href="gensar-consulting.html">Internship</a></li>
                         <li><a href="careers.html">Careers</a></li>
                         <li><a href="hire-us.html">Find Talent</a></li>
                         <li><a href="get-in-touch.html">Get In Touch</a></li>
                     </ul>
-                </div>
-                <div class="col-lg-2 col-md-6 footer-services">
-                    <h5 class="footer-title">Services</h5>
-                    <ul class="footer-links">
-                        <li><a href="our-services.html">IT Solutions</a></li>
-                        <li><a href="hire-us.html">Staffing Solutions</a></li>
-                        <li><a href="gensar-consulting.html">Corporate Training</a></li>
-                        <li><a href="gensar-consulting.html">AI & Data Services</a></li>
-                        <li><a href="gensar-consulting.html">Cyber Security</a></li>
-                        <li><a href="gensar-consulting.html">Cloud Services</a></li>
-                        <li><a href="gensar-consulting.html">Web Development</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-3 col-md-6 footer-services">
-                    <h5 class="footer-title">Our Locations</h5>
-                    <div class="footer-location">
-                        <p><i class="bi bi-geo-alt-fill"></i><strong>Hyderabad</strong> Manjeera Trinity, 402, 4th floor, KPHB, Hyderabad – 500072</p>
-                        <p><i class="bi bi-geo-alt-fill"></i><strong>Bangalore</strong> #824, 1st Block HRBR Layout, 5th A Cross, Kalyan Nagar, Bangalore, Karnataka -560043</p>
-                        <p><i class="bi bi-geo-alt-fill"></i><strong>USA</strong> 1760 Reston Pkwy, Reston, VA 20190, USA</p>
-                        <p><i class="bi bi-geo-alt-fill"></i><strong>Dubai</strong> Prime Business centre- AI Barsha South Fourth- Jumeirah Village Circle- Dubai- United Arab Emirates</p>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-newsletter mt-5">
-                <div class="row align-items-center">
-                    <div class="col-lg-6">
-                        <h4>Stay Updated With Gensar</h4>
-                        <p>Get updates on services, hiring opportunities, and training programs.</p>
-                    </div>
-                    <div class="col-lg-6">
-                        <form class="newsletter-form">
-                            <input type="email" placeholder="Enter your email address">
-                            <button type="submit">Subscribe</button>
-                        </form>
-                    </div>
                 </div>
             </div>
         </div>
@@ -326,18 +138,5 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
-
-    <div class="scroll-progress" id="scrollProgress">
-        <svg viewBox="0 0 40 40">
-            <circle class="progress-bg" cx="20" cy="20" r="17" />
-            <circle class="progress-fill" id="progressFill" cx="20" cy="20" r="17" />
-        </svg>
-    </div>
-    <a href="https://wa.me/9121912138" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
-        <svg viewBox="0 0 24 24">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
-        </svg>
-    </a>
 </body>
-
 </html>

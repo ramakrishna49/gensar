@@ -1,22 +1,26 @@
 import { db } from "@/lib/db";
-import { clientLogos } from "@/lib/db/schema";
+import { siteSettings } from "@/lib/db/schema";
 import { NextResponse } from "next/server";
-import { desc, eq, and } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 
-export async function GET(req: Request) {
-  const { searchParams } = new URL(req.url);
-  const section = searchParams.get("section");
+export const runtime = "edge";
 
-  const conditions = [eq(clientLogos.isActive, true)];
-  if (section) conditions.push(eq(clientLogos.section, section));
+export async function GET() {
+  const socialKeys = ["linkedin", "instagram"];
+  const results = [];
 
-  const result = await db
-    .select()
-    .from(clientLogos)
-    .where(and(...conditions))
-    .orderBy(desc(clientLogos.displayOrder), desc(clientLogos.createdAt));
+  for (const key of socialKeys) {
+    const [setting] = await db
+      .select()
+      .from(siteSettings)
+      .where(and(eq(siteSettings.section, "social"), eq(siteSettings.key, key)))
+      .limit(1);
+    if (setting) {
+      results.push({ key: setting.key, value: setting.value });
+    }
+  }
 
-  return NextResponse.json(result, {
+  return NextResponse.json(results, {
     headers: {
       "Access-Control-Allow-Origin": "*",
       "Access-Control-Allow-Methods": "GET, OPTIONS",

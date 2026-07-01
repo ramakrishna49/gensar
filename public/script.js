@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // FORM SUBMISSION TO API
 // ==========================================================================
 
-var API_BASE = window.location.origin.includes('gensar') ? 'https://gensar-admin.vercel.app' : window.location.origin;
+var API_BASE = window.location.origin;
 // If this static site is served on a separate port (e.g. file:// or local server),
 // set API_BASE to the Vercel production URL by default. Change to your dev server as needed.
 // For local dev with Next.js running on port 3000: set API_BASE = 'http://localhost:3000'
@@ -274,6 +274,10 @@ async function submitFormToAPI(formData) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
         });
+        if (!res.ok) {
+            var errBody = await res.json().catch(function () { return {}; });
+            console.error('Submit API error:', res.status, errBody);
+        }
         return res.ok;
     } catch (e) {
         console.error('Form submission failed:', e);
@@ -295,6 +299,8 @@ async function submitFormWithFile(formData, fileInput) {
             if (uploadRes.ok) {
                 var uploadData = await uploadRes.json();
                 resumeUrl = uploadData.url || '';
+            } else {
+                console.error('Upload failed with status', uploadRes.status);
             }
         } catch (e) {
             console.error('File upload failed:', e);
@@ -314,6 +320,10 @@ async function submitFormWithFile(formData, fileInput) {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload),
         });
+        if (!res.ok) {
+            var errBody = await res.json().catch(function () { return {}; });
+            console.error('Submit API error:', res.status, errBody);
+        }
         return res.ok;
     } catch (e) {
         console.error('Form submission failed:', e);
@@ -321,25 +331,208 @@ async function submitFormWithFile(formData, fileInput) {
     }
 }
 
+function removeNewsletterMessages(form) {
+    var container = form.querySelector('.newsletter-msg-container');
+    if (container) {
+        container.querySelectorAll('.newsletter-success, .newsletter-error').forEach(function (el) { el.remove(); });
+    }
+}
+
+function showNewsletterMsg(form, inputEl, text, type) {
+    removeNewsletterMessages(form);
+    var isName = inputEl && inputEl.classList.contains('newsletter-name');
+    var container = form.querySelector(isName ? '.newsletter-name-msg' : '.newsletter-msg-container');
+    if (!container) return;
+    var msg = document.createElement('span');
+    msg.className = 'newsletter-' + type;
+    msg.textContent = text;
+    var isSuccess = type === 'success';
+    msg.style.cssText = 'display:block;margin-top:6px;font-size:12px;font-weight:500;color:' + (isSuccess ? '#22c55e' : '#ef4444') + ';';
+    container.appendChild(msg);
+    if (isSuccess) {
+        setTimeout(function () { msg.remove(); }, 4000);
+    }
+}
+
 function initNewsletterForms() {
     var forms = document.querySelectorAll('.newsletter-form');
     forms.forEach(function (form) {
+        var emailInput = form.querySelector('input[type="email"]');
+        if (!emailInput) return;
+
+        // Wrap name input so messages appear near it
+        if (!form.querySelector('.newsletter-name-msg')) {
+            var nameWrapper = document.createElement('div');
+            nameWrapper.className = 'newsletter-name-msg';
+            nameWrapper.style.cssText = 'display:flex;flex-direction:column;width:100%;';
+            var nameInput = form.querySelector('.newsletter-name');
+            if (nameInput) {
+                nameInput.parentNode.insertBefore(nameWrapper, nameInput);
+                nameWrapper.appendChild(nameInput);
+            }
+        }
+
+        // Wrap email input in a container so messages sit below it in flex layout
+        if (!form.querySelector('.newsletter-msg-container')) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'newsletter-msg-container';
+            wrapper.style.cssText = 'display:flex;flex-direction:column;width:100%;';
+            emailInput.parentNode.insertBefore(wrapper, emailInput);
+            wrapper.appendChild(emailInput);
+        }
+
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
-            var input = form.querySelector('input[type="email"]');
-            if (!input || !input.value.trim()) return;
+            removeNewsletterMessages(form);
 
-            var email = input.value.trim();
-            input.value = '';
+            var nameInput = form.querySelector('.newsletter-name');
+            var container = form.querySelector('.newsletter-msg-container');
+            var emailInput = container ? container.querySelector('input[type="email"]') : form.querySelector('input[type="email"]');
+            if (!emailInput) return;
 
-            await submitFormToAPI({
+            var name = nameInput ? nameInput.value.trim() : '';
+            var email = emailInput.value.trim();
+
+            var nameRegex = /^[a-zA-Z\s.'-]+$/;
+            if (name && !nameRegex.test(name)) {
+                showNewsletterMsg(form, form.querySelector('.newsletter-name'), 'Please enter a valid name (letters only)', 'error');
+                return;
+            }
+
+            var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email) {
+                showNewsletterMsg(form, emailInput, 'Please enter your email address', 'error');
+                return;
+            }
+            if (!emailRegex.test(email)) {
+                showNewsletterMsg(form, emailInput, 'Please enter a valid email address', 'error');
+                return;
+            }
+
+            var ok = await submitFormToAPI({
                 formType: 'newsletter',
-                data: { email: email }
+                data: { name: name, email: email }
             });
+
+            if (ok) {
+                if (nameInput) nameInput.value = '';
+                emailInput.value = '';
+                showNewsletterMsg(form, emailInput, name ? name + ', you\'re subscribed!' : 'Subscribed successfully!', 'success');
+            } else {
+                showNewsletterMsg(form, emailInput, 'Subscription failed. Please try again.', 'error');
+            }
         });
     });
 }
 
+// ==========================================================================
+// SOCIAL MEDIA LINKS FROM ADMIN SETTINGS
+// ==========================================================================
+
+async function loadSocialLinks() {
+    try {
+        var res = await fetch('/api/public/settings');
+        if (!res.ok) return;
+        var settings = await res.json();
+        var linkMap = {};
+        settings.forEach(function (s) { linkMap[s.key] = s.value; });
+
+        var socialLinks = document.querySelectorAll('.footer-social a');
+        socialLinks.forEach(function (a) {
+            var icon = a.querySelector('i');
+            if (!icon) return;
+            var classes = icon.className;
+            if (classes.includes('bi-linkedin') && linkMap.linkedin) {
+                a.href = linkMap.linkedin;
+            } else if (classes.includes('bi-instagram') && linkMap.instagram) {
+                a.href = linkMap.instagram;
+            }
+        });
+    } catch (e) {
+        console.error('Failed to load social links:', e);
+    }
+}
+
+// ==========================================================================
+// DROPDOWN HOVER FIX (desktop only)
+// ==========================================================================
+
+(function () {
+    function initDropdownHover() {
+        var dropdowns = document.querySelectorAll('.custom-dropdown');
+        if (!dropdowns.length) return;
+
+        var isMobile = function () { return window.innerWidth < 992; };
+        var closeTimeout = null;
+
+        function showDropdown(dd) {
+            if (closeTimeout) { clearTimeout(closeTimeout); closeTimeout = null; }
+            dd.classList.add('show');
+            var menu = dd.querySelector('.dropdown-menu');
+            if (menu) menu.classList.add('show');
+            var toggle = dd.querySelector('.dropdown-toggle');
+            if (toggle) toggle.setAttribute('aria-expanded', 'true');
+        }
+
+        function hideDropdown(dd) {
+            dd.classList.remove('show');
+            var menu = dd.querySelector('.dropdown-menu');
+            if (menu) menu.classList.remove('show');
+            var toggle = dd.querySelector('.dropdown-toggle');
+            if (toggle) toggle.setAttribute('aria-expanded', 'false');
+        }
+
+        dropdowns.forEach(function (dd) {
+            dd.addEventListener('mouseenter', function () {
+                if (isMobile()) return;
+                showDropdown(dd);
+            });
+
+            dd.addEventListener('mouseleave', function () {
+                if (isMobile()) return;
+                closeTimeout = setTimeout(function () { hideDropdown(dd); }, 200);
+            });
+
+            var menu = dd.querySelector('.dropdown-menu');
+            if (menu) {
+                menu.addEventListener('mouseenter', function () {
+                    if (closeTimeout) { clearTimeout(closeTimeout); closeTimeout = null; }
+                });
+                menu.addEventListener('mouseleave', function () {
+                    if (isMobile()) return;
+                    hideDropdown(dd);
+                });
+            }
+
+            // Prevent Bootstrap's click toggle on desktop to avoid conflicts
+            var toggle = dd.querySelector('.dropdown-toggle');
+            if (toggle) {
+                toggle.addEventListener('click', function (e) {
+                    if (!isMobile()) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                });
+            }
+        });
+
+        // Also close on Escape key
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') {
+                dropdowns.forEach(function (dd) { hideDropdown(dd); });
+            }
+        });
+    }
+
+    // Run after DOM ready; also re-run if Bootstrap replaces content
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initDropdownHover);
+    } else {
+        initDropdownHover();
+    }
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
     initNewsletterForms();
+    loadSocialLinks();
 });

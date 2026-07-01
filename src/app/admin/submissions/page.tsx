@@ -95,6 +95,21 @@ export default function SubmissionsPage() {
     }
   }
 
+  function downloadResume(url: string, filename: string) {
+    fetch(url)
+      .then((r) => r.blob())
+      .then((blob) => {
+        const a = document.createElement("a");
+        a.href = URL.createObjectURL(blob);
+        a.download = filename || "resume.pdf";
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(() => URL.revokeObjectURL(a.href), 60000);
+      })
+      .catch(() => toast("Download failed", "error"));
+  }
+
   const unreadCount = submissions.filter((s) => !s.read).length;
 
   return (
@@ -158,6 +173,7 @@ export default function SubmissionsPage() {
                   <th className="text-left px-4 sm:px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Type</th>
                   <th className="text-left px-4 sm:px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Name</th>
                   <th className="text-left px-4 sm:px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Email</th>
+                  <th className="text-left px-4 sm:px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Resume</th>
                   <th className="text-left px-4 sm:px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Date</th>
                   <th className="text-left px-4 sm:px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Status</th>
                   <th className="text-right px-4 sm:px-6 py-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">Actions</th>
@@ -167,10 +183,10 @@ export default function SubmissionsPage() {
                 {submissions.map((s) => {
                   const data = s.formData as Record<string, unknown>;
                   const name = String(
-                    data.contactName || data.careersName || data.fullName || data.reqName || data.homeName || ""
+                    data.contactName || data.careersName || data.fullName || data.reqName || data.homeName || data.name || ""
                   );
                   const email = String(
-                    data.contactEmail || data.careersEmail || data.emailAddr || data.reqEmail || data.homeEmail || ""
+                    data.contactEmail || data.careersEmail || data.emailAddr || data.reqEmail || data.homeEmail || data.email || ""
                   );
 
                   return (
@@ -193,6 +209,18 @@ export default function SubmissionsPage() {
                         </Link>
                       </td>
                       <td className="px-4 sm:px-6 py-4 text-sm text-slate-600">{email || "--"}</td>
+                      <td className="px-4 sm:px-6 py-4">
+                        {s.resumeUrl ? (
+                          <div className="flex items-center gap-1.5 flex-wrap">
+                            <i className="fa-solid fa-file-pdf text-red-500 text-xs"></i>
+                            <span className="text-xs text-slate-500 truncate max-w-[100px]">{s.resumeUrl.split('/').pop()?.split('?')[0] || 'resume'}</span>
+                            <a href={s.resumeUrl} target="_blank" rel="noopener noreferrer" className="px-2 py-0.5 text-xs bg-blue-50 text-blue-600 hover:bg-blue-100 rounded transition font-medium" title="View"><i className="fa-solid fa-eye"></i></a>
+                            <button onClick={() => downloadResume(s.resumeUrl!, s.resumeUrl!.split('/').pop()?.split('?')[0] || 'resume')} className="px-2 py-0.5 text-xs bg-emerald-50 text-emerald-600 hover:bg-emerald-100 rounded transition font-medium" title="Download"><i className="fa-solid fa-download"></i></button>
+                          </div>
+                        ) : (
+                          <span className="text-xs text-slate-300 italic">--</span>
+                        )}
+                      </td>
                       <td className="px-4 sm:px-6 py-4 text-sm text-slate-500">
                         {new Date(s.createdAt).toLocaleDateString()}
                       </td>

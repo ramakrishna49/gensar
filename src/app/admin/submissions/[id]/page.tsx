@@ -17,7 +17,7 @@ const fieldLabels: Record<string, string> = {
   reqName: "Your Name", reqEmail: "Your Email", reqCompany: "Company", reqPhone: "Phone",
   reqService: "Service Needed", reqMessage: "Message",
   homeName: "Name", homeEmail: "Email", homePhone: "Phone", homeMessage: "Message",
-  email: "Email",
+  name: "Name", email: "Email",
 };
 
 export default async function SubmissionDetailPage({ params }: { params: Promise<{ id: string }> }) {

@@ -44,7 +44,7 @@ export default function AdminSidebar() {
       >
         <div className="flex items-center justify-between px-4 py-3 border-b border-slate-700">
           <Link href="/admin/dashboard" className="flex items-center gap-2" onClick={() => setOpen(false)}>
-            <img src="/img/Gensar Main Logo 2400x1800.jpg.jpeg" alt="Gensar" className="h-10 w-auto" />
+            <img src="/img/Gensar Main Logo 2400x1800.jpg.jpeg" alt="Gensar" className="h-14 w-auto" />
             <span className="text-base font-bold tracking-tight">Admin</span>
           </Link>
           <button
@@ -87,7 +87,7 @@ export default function AdminSidebar() {
               } catch {}
               window.location.href = "/admin/login";
             }}
-            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:bg-slate-700/50 hover:text-white w-full transition"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-red-300 hover:bg-red-500/20 hover:text-red-200 hover:ring-1 hover:ring-red-400/40 w-full transition cursor-pointer"
           >
             <i className="fa-solid fa-right-from-bracket w-5 text-center"></i>
             Sign Out

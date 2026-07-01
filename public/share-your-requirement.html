@@ -329,92 +329,11 @@
 
         }
 
-        /* Testimonial Heading */
-
-        .testimonial-heading {
-            max-width: 650px;
-            margin-bottom: 50px;
-        }
-
-        .testimonial-heading h2 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            color: var(--text-primary);
-        }
-
-        .testimonial-heading h2 span {
-            background: linear-gradient(135deg,
-                    var(--color-primary),
-                    var(--color-secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .testimonial-heading p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        /* Cards */
-
-        .testimonial-card {
-            background: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px solid var(--border-color);
-            height: 100%;
-            transition: .4s;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--color-primary);
-            box-shadow: 0 20px 40px rgba(181, 138, 227, .12);
-        }
-
-        .testimonial-card img {
-            width: 85px;
-            height: 85px;
-            border-radius: 10px;
-            object-fit: cover;
-            margin-bottom: 20px;
-        }
-
-        .testimonial-card h4 {
-            color: var(--color-primary);
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-        }
-
-        .testimonial-card p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            font-size: .95rem;
-        }
-
-        .rating {
-            color: #fbbf24;
-            margin: 15px 0;
-            letter-spacing: 2px;
-        }
-
-        .testimonial-card span {
-            color: var(--text-primary);
-            font-weight: 600;
-        }
-
         /* Mobile */
 
         @media(max-width:768px) {
 
             .clients-title {
-                font-size: 2.2rem;
-            }
-
-            .testimonial-heading h2 {
                 font-size: 2.2rem;
             }
 
@@ -464,19 +383,23 @@
                             Internship
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="gensar-consulting.html?course=ai-ml">AI &
+                            <li><a class="dropdown-item" href="gensar-consulting.html#ai-ml" data-course-select="ai-ml">AI &
                                     ML</a></li>
-                            <li><a class="dropdown-item" href="gensar-consulting.html?course=data-science">Data Science</a></li>
-                            <li><a class="dropdown-item" href="gensar-consulting.html?course=data-analytics">Data Analytics</a></li>
-                            <li><a class="dropdown-item" href="gensar-consulting.html?course=cyber-security">Cyber Security</a></li>
-                            <li><a class="dropdown-item" href="gensar-consulting.html?course=full-stack">Full Stack Development</a></li>
+                            <li><a class="dropdown-item" href="gensar-consulting.html"
+                                    data-course-select="data-science">Data Science</a></li>
+                            <li><a class="dropdown-item" href="gensar-consulting.html"
+                                    data-course-select="data-analytics">Data Analytics</a></li>
+                            <li><a class="dropdown-item" href="gensar-consulting.html"
+                                    data-course-select="cyber-security">Cyber Security</a></li>
+                            <li><a class="dropdown-item" href="gensar-consulting.html"
+                                    data-course-select="full-stack">Full Stack Development</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="careers.html">Careers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="hire-us.html">Find Talent</a>
+                        <a class="nav-link active" href="hire-us.html">Hire Us</a>
                     </li>
                 </ul>
                 <a href="get-in-touch.html" class="contact-btn">
@@ -550,7 +473,7 @@
 
                 <div class="requirement-right">
 
-                    <h2>Drop Your Requirement</h2>
+                    <h2>Share Your Requirement</h2>
                     <div class="divider"></div>
 
 
@@ -648,7 +571,7 @@
                             <input type="checkbox" id="agreeCheck">
 
                             <label for="agreeCheck">
-                                I agree to the <a href="privacy-policy.html" style="color: #b58ae3; text-decoration: underline;">Privacy Policy</a> and <a href="terms-conditions.html" style="color: #b58ae3; text-decoration: underline;">Terms & Conditions</a>.
+                                I agree to the Privacy Policy and Terms & Conditions.
                             </label>
 
                         </div>
@@ -699,27 +622,6 @@
                 <div class="clients-track" id="shareLogosTrack"></div>
             </div>
 
-            <div class="testimonial-heading anim-fade from-right">
-
-                <span class="section-subtitle">
-                    CLIENT SUCCESS STORIES
-                </span>
-
-                <h2>
-                    Trusted By
-                    <span>Growing Businesses</span>
-                </h2>
-                <div class="divider"></div>
-
-                <p>
-                    Organizations trust Gensar Consulting for recruitment,
-                    technology consulting and business transformation.
-                </p>
-
-            </div>
-
-            <div class="row g-4 anim-fade from-right" id="shareTestimonialsContainer"></div>
-
         </div>
 
     </section>
@@ -743,8 +645,8 @@
                         </p>
 
                         <div class="footer-social">
-                            <a href="https://www.linkedin.com/company/gensar-group/posts/?feedView=all" target="_blank"><i class="bi bi-linkedin"></i></a>
-                            <a href="https://www.instagram.com/gensar_group/" target="_blank"><i class="bi bi-instagram"></i></a>
+                            <a href="https://linkedin.com/company/gensar" target="_blank"><i class="bi bi-linkedin"></i></a>
+                            <a href="https://instagram.com/gensar" target="_blank"><i class="bi bi-instagram"></i></a>
                         </div>
 
                     </div>
@@ -760,6 +662,7 @@
                         <li><a href="about.html">About</a></li>
                         <li><a href="our-services.html">Services</a></li>
                         <li><a href="gensar-consulting.html">Courses</a></li>
+                        <li><a href="gensar-consulting.html">Internship</a></li>
                         <li><a href="careers.html">Careers</a></li>
                         <li><a href="hire-us.html">Find Talent</a></li>
                         <li><a href="get-in-touch.html">Get In Touch</a></li>
@@ -830,6 +733,7 @@
 
                     <div class="col-lg-6">
                         <form class="newsletter-form">
+                            <input type="text" class="newsletter-name" placeholder="Your name" pattern="[a-zA-Z\s.'-]+" title="Letters only">
                             <input type="email" placeholder="Enter your email address">
                             <button type="submit">
                                 Subscribe
@@ -880,6 +784,8 @@
 
             document.querySelector(".checkbox-error").innerText = "";
 
+            let firstInvalid = null;
+
             function showError(id, msg) {
 
                 document
@@ -889,6 +795,7 @@
                     .innerText = msg;
 
                 valid = false;
+                if (!firstInvalid) firstInvalid = document.getElementById(id);
             }
 
             const name = document.getElementById("reqName");
@@ -900,8 +807,11 @@
             const experience = document.getElementById("reqExperience");
             const agree = document.getElementById("agreeCheck");
 
+            const nameRegex = /^[a-zA-Z\s.'-]+$/;
             if (name.value.trim() === "")
                 showError("reqName", "Please enter your name");
+            else if (!nameRegex.test(name.value.trim()))
+                showError("reqName", "Please enter a valid name (letters only)");
 
             if (openings.value.trim() === "")
                 showError("reqOpenings", "Please enter required candidates");
@@ -922,11 +832,16 @@
             else if (!phoneRegex.test(phone.value))
                 showError("reqPhone", "Please enter valid 10 digit phone number");
 
+            const genericRegex = /^[a-zA-Z0-9\s.\-&',()]+$/;
             if (designation.value.trim() === "")
                 showError("reqDesignation", "Please enter designation");
+            else if (!genericRegex.test(designation.value.trim()))
+                showError("reqDesignation", "Please enter a valid designation");
 
             if (company.value.trim() === "")
                 showError("reqCompany", "Please enter company name");
+            else if (!genericRegex.test(company.value.trim()))
+                showError("reqCompany", "Please enter a valid company name");
 
             if (!experience.value)
                 showError("reqExperience", "Please select experience required");
@@ -935,6 +850,10 @@
                 document.querySelector(".checkbox-error").innerText =
                     "Please accept privacy policy";
                 valid = false;
+            }
+
+            if (!valid) {
+                if (firstInvalid) firstInvalid.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
 
             if (valid) {
@@ -957,6 +876,7 @@
                 if (ok) {
                     document.getElementById("successMessage").style.display = "block";
                     form.reset();
+                    setTimeout(function () { document.getElementById("successMessage").style.display = "none"; }, 3000);
                 }
             }
 
@@ -978,20 +898,7 @@
                     }
                 }
             } catch (e) { console.log(e); }
-            try {
-                var r = await fetch(SYR_API + '/testimonials?section=contact');
-                if (r.ok) {
-                    var testimonials = await r.json();
-                    var c = document.getElementById('shareTestimonialsContainer');
-                    if (c && testimonials.length) {
-                        var delays = ['delay-100', 'delay-200', 'delay-300', 'delay-300'];
-                        c.innerHTML = testimonials.map(function (t, i) {
-                            var d = delays[i % delays.length] || '';
-                            return '<div class="col-lg-3 col-md-6 ' + d + '"><div class="testimonial-card"><img src="' + (t.avatarUrl || 'img/user1.jpg') + '" alt=""><h4>' + (t.role || 'Client') + '</h4><p>"' + (t.content || '') + '"</p><div class="rating">' + '★'.repeat(t.rating || 5) + '</div><span>' + (t.name || '') + '</span></div></div>';
-                        }).join('');
-                    }
-                }
-            } catch (e) { console.log(e); }
+
         });
     </script>
 
@@ -1001,7 +908,7 @@
             <circle class="progress-fill" id="progressFill" cx="20" cy="20" r="17" />
         </svg>
     </div>
-    <a href="https://wa.me/9121912138" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
+    <a href="https://wa.me/916303773891" target="_blank" class="whatsapp-float" aria-label="Chat on WhatsApp">
         <svg viewBox="0 0 24 24">
             <path
                 d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />

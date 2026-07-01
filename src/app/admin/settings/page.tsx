@@ -15,10 +15,8 @@ const defaultSettings = [
   { section: "contact", key: "email", label: "Contact Email", type: "text", defaultValue: "" },
   { section: "contact", key: "phone", label: "Phone", type: "text", defaultValue: "" },
   { section: "contact", key: "address", label: "Address", type: "text", defaultValue: "" },
-  { section: "social", key: "linkedin", label: "LinkedIn URL", type: "text", defaultValue: "" },
-  { section: "social", key: "twitter", label: "Twitter URL", type: "text", defaultValue: "" },
-  { section: "social", key: "facebook", label: "Facebook URL", type: "text", defaultValue: "" },
-  { section: "social", key: "instagram", label: "Instagram URL", type: "text", defaultValue: "" },
+  { section: "social", key: "linkedin", label: "LinkedIn URL", type: "text", defaultValue: "", icon: "fab fa-linkedin", iconColor: "#0a66c2" },
+  { section: "social", key: "instagram", label: "Instagram URL", type: "text", defaultValue: "", icon: "fab fa-instagram", iconColor: "#e4405f" },
 ];
 
 export default function SettingsPage() {
@@ -142,7 +140,10 @@ function SettingsField({
 
   return (
     <div>
-      <label className="block text-sm font-medium text-slate-700 mb-1">{field.label}</label>
+      <label className="block text-sm font-medium text-slate-700 mb-1">
+        {field.icon ? <i className={`${field.icon} me-1`} style={{color: field.iconColor}}></i> : null}
+        {field.label}
+      </label>
       <div className="flex flex-col sm:flex-row gap-2">
         <input
           type={field.type}
