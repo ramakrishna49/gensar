@@ -40,17 +40,30 @@
             top: 120px;
             text-align: center;
             height: fit-content;
-            background-image: url('img/build.jpeg');
-            background-size: cover;
-            background-position: center;
-            opacity: 1;
+            position: relative;
+            isolation: isolate;
             padding: 30px;
 
+        }
+
+        .requirement-left::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: url('img/build.jpeg') center center/cover no-repeat;
+            opacity: .2;
+            z-index: -1;
+            border-radius: inherit;
         }
 
         .requirement-left img {
             width: 100%;
             max-width: 350px;
+        }
+
+        .requirement-left > * {
+            position: relative;
+            z-index: 1;
         }
 
         .requirement-left h3 {
@@ -399,7 +412,7 @@
                         <a class="nav-link" href="careers.html">Careers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="hire-us.html">Hire Us</a>
+                        <a class="nav-link" href="hire-us.html">Find Talent</a>
                     </li>
                 </ul>
                 <a href="get-in-touch.html" class="contact-btn">
@@ -707,7 +720,7 @@
                         <p>
                             <i class="bi bi-geo-alt-fill"></i>
                             <strong>USA</strong>
-                            1760 Reston Pkwy, Reston, VA 20190, USA
+                            1760 Reston Parkway, Reston, VA 20190, USA
                         </p>
 
                         <p>
@@ -885,7 +898,7 @@
     </script>
 
     <script>
-        var SYR_API = (window.location.origin.includes('gensar') ? 'https://gensar-admin.vercel.app' : window.location.origin) + '/api/public';
+        var SYR_API = (window.location.origin.includes('gensar') ? 'https://gensar-admin-ramakrishna49s-projects.vercel.app' : window.location.origin) + '/api/public';
         document.addEventListener('DOMContentLoaded', async function () {
             try {
                 var r = await fetch(SYR_API + '/logos');
