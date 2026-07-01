@@ -257,10 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
 // FORM SUBMISSION TO API
 // ==========================================================================
 
-var API_BASE = window.location.origin;
-// If this static site is served on a separate port (e.g. file:// or local server),
-// set API_BASE to the Vercel production URL by default. Change to your dev server as needed.
-// For local dev with Next.js running on port 3000: set API_BASE = 'http://localhost:3000'
+var API_BASE = (window.location.origin.includes('gensar') ? 'https://gensar-admin-ramakrishna49s-projects.vercel.app' : window.location.origin);
 
 async function submitFormToAPI(formData) {
     var payload = {
